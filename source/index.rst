@@ -10,18 +10,11 @@ Welcome to jasmin-doc's documentation!
    :maxdepth: 2
    :caption: Contents:
 
-Jasmin doc test1
-=====================================
-
-.. toctree::
-
    Syntax-reference.md
 
-
-Jasmin doc test1
-=====================================
-
 .. toctree::
+   :maxdepth: 2
+   :caption: Contents2:
 
    Jasmin-language-guide.md
 
