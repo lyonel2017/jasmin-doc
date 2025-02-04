@@ -319,9 +319,6 @@ Notation for storing values is the same with a slight difference when specifying
 (u64)[ptr + offset] = var;
 ```
 
-[comment]: <> (TODO: something related to bool assignments)
-
-
 ## Intrinsics
 
 ```
