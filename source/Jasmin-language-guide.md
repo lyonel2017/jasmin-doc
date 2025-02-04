@@ -350,7 +350,7 @@ The list of available architecture-specific instructions can be seen using
 
 Conditionals take an expression and two pieces of code, and execute one piece
 or the other depending on whether the expression evaluates to `true` or
-`false`.
+`false` (conditions cannot be complex expressions).
 The basic syntax for conditionals is as follows
 ```
 if (x != y) {
@@ -373,8 +373,6 @@ if (x < y) {
 ```
 where again last `else` branch can be omitted.
 This is syntactic sugar for nested conditionals.
-
-[comment]: <> (we can only use boolean values in conditions and conditions cannot be complex operations)
 
 
 ## For loops
