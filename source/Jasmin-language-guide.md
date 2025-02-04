@@ -303,9 +303,23 @@ Subarrays consists on two parts:
 - length: amount of elements to access
 
 ### Load and store
+Suppose a register `reg u64 ptr` which value is a memory address. Then, for loading values from memory the notation is as follows:
+```
+reg u64 var;
+var = [ptr + offset];
+// or for better understanding
+var = (64u)[ptr + offset];
+```
+`offset` is measured in bytes.
 
+Notation for storing values is the same with a slight difference when specifying the type,
+```
+[ptr + offset] = var;
+// or for better understanding
+(u64)[ptr + offset] = var;
+```
 
-[comment]: <> (we could say something about casting variables, TODO: something related to bool assignments and about loads and stores)
+[comment]: <> (TODO: something related to bool assignments)
 
 
 ## Intrinsics
