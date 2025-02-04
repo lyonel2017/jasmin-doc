@@ -338,8 +338,6 @@ function name.
 The list of available architecture-specific instructions can be seen using
 `$ jasminc -help-intrinsics`.
 
-[comment]: <> (we can see which intrinsics are available but information about arguments is not provided enviar a js)
-
 
 ## Conditionals
 
