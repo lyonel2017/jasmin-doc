@@ -1,4 +1,4 @@
-# Compuilation Passes
+# Compilation Passes
 
 Here are the different compilation passes performed by the Jasmin compiler.
 
