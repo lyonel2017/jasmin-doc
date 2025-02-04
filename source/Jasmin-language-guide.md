@@ -18,6 +18,16 @@ A Jasmin program is list of:
 
 # Requires
 
+```
+require <string>
+```
+```
+require <string> ... <string>
+```
+```
+from <ident> require <string> ... <string>
+```
+
 A program may be split into several files using a `require` clause.
 Its simplest form is as follows
 ```
@@ -63,6 +73,10 @@ See [[the require section|Syntax-reference#requires]] for the full syntax.
 
 
 # Parameters
+
+```
+param <type> <ident> = <expr>;
+```
 
 A parameter is a named value.
 They can be used in code and also within types (e.g., as the size of an array).
@@ -166,6 +180,20 @@ return statement.
 
 Jasmin code comprises the following constructs:
 
+```
+<code> ::=
+  | <empty>
+  | <instr> <code>
+
+<instr> ::=
+  | <instr_assign>
+  | <instr_intrinsic>
+  | <instr_conditional>
+  | <instr_while>
+  | <instr_for>
+  | <instr_call>
+```
+
 1. assignments;
 1. intrinsics;
 1. conditionals;
@@ -178,6 +206,11 @@ TODO: Add link to command syntax.
 
 
 ## Assignments
+
+```
+<instr_assign> ::=
+  | <lval> = <expr>;
+```
 
 The basic syntax for assignments is the usual equal sign
 ```
@@ -197,6 +230,11 @@ TODO: Add link to left value and expression syntax.
 
 ## Intrinsics
 
+```
+<instr_intrinsic> ::=
+  | <lval>, ..., <lval> = #<ident>(<expr>, ..., <expr>);
+```
+
 Intrinsics are architecture-specific instructions.
 The basic syntax is as follows
 ```
@@ -211,6 +249,13 @@ The list of available architecture-specific instructions can be seen using
 
 
 ## Conditionals
+
+```
+<instr_conditional> ::=
+  | if ( <expr> ) { <code> }
+  | if ( <expr> ) { <code> } else { <code> }
+  | if ( <expr> ) { <code> } else <instr_conditional>  // else-if syntax.
+```
 
 Conditionals take an expression and two pieces of code, and execute one piece
 or the other depending on whether the expression evaluates to `true` or
@@ -241,6 +286,12 @@ This is syntactic sugar for nested conditionals.
 
 ## For loops
 
+```
+<instr_for> ::=
+  | for <ident> = <expr> to <expr> { <code> }
+  | for <ident> = <expr> downto <expr> { <code> }
+```
+
 For loops execute a piece of code some fixed number of times.
 These iterations depend on an `inline int` counter, that takes values in a given
 range.
@@ -265,8 +316,14 @@ for i = 13 downto 0 {
 }
 ```
 
-
 ## While loops
+
+```
+<instr_while> ::=
+  | while ( <expr> ) { <code> }  // Usual while loop.
+  | while { <code> } ( <expr> )  // do-while loop.
+  | while { <code> } ( <expr> ) { <code> }  // Both.
+```
 
 While loops execute a piece of code until a condition is met.
 The basic syntax for while loops is
@@ -299,6 +356,12 @@ while {
 
 ## Function calls
 
+```
+<instr_call> ::=
+  | <ident>(<expr>, ..., <expr>);
+  | <lval>, ..., <lval> = <ident>(<expr>, ..., <expr>);
+```
+
 The syntax for function calls is as follows
 ```
 z = add_then_shift_left(x, y, 2);
@@ -311,8 +374,69 @@ do_side_effect_computation(x, y);
 ```
 
 ## Expressions
+```
+<expr> ::=
+  | <int>  // Integer constant.
+  | <bool>  // Boolean constant.
+  | <var>  // Variable.
+  | (<wsize>)[<var> + <expr>] // Memory access.
+  | (<wsize>)[<var> - <expr>] // Memory access.
+  | <var>[<expr>]  // Array access.
+  | <var>[<wsize> <expr>]  // Array access.
+  | <var>.[<wsize> <expr>]  // Unscaled array access.
+  | <var>[<expr> : <expr>]  // Subarray.
+  | <op1> <expr>  // Unary operation.
+  | <expr> <op2> <expr>  // Binary operation.
+  | <expr> ? <expr> : <expr>  // Conditional.
+  | (<int><sign><int>)[<expr>, ..., <expr>] // Packing.
+  | (<expr>)
+```
+### Unary operators
+
+```
+<op1> ::=
+  | !  // Boolean and bitwise negation.
+  | -  // Arithmetic negation.
+  | (<cast>) // Cast.
+
+<cast> ::=
+  | <wsize_size><sign>
+  | int
+```
 
 ### Binary operators
+
+```
+<op2> ::=
+  | +  // Addition.
+  | -  // Subtraction.
+  | *  // Multiplication.
+  | /  // Division.
+  | %  // Modulo.
+  | &  // Bitwise AND.
+  | |  // Bitwise OR.
+  | ^  // Bitwise XOR (exclusive OR).
+
+  | ==  // Equality test.
+  | !=  // Inequality test.
+  | <  // Unsgined less than test.
+  | <s  // Signed less than test.
+  | >  // Unsigned greater than test.
+  | >s  // Signed greater than test.
+  | <=  // Unsigned less than or equal test.
+  | <=s  // Signed less than or equal test.
+  | >=  // Unsigned greater than or equal test.
+  | >=s  // Signed greater than or equal test.
+
+  | <<  // Left rotation.
+  | >>  // Right rotation.
+  | >>s  // Arithmetic right rotation.
+  | <<r  // Left rotation.
+  | >>r  // Right rotation.
+
+  | &&  // Boolean AND.
+  | ||  // Boolean OR.
+```
 
 - `+`: Addition.
 - `<<`: Left shift.
