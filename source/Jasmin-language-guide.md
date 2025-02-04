@@ -489,14 +489,13 @@ do_side_effect_computation(x, y);
   | (<expr>)
 ```
 
-[comment]: <> (maybe an example of each, this notation might be overwhelming for beginners)
 
 ### Unary operators
 
 ```
 <op1> ::=
-  | !  // Boolean and bitwise negation.
-  | -  // Arithmetic negation.
+  | !        // Boolean and bitwise negation.
+  | -        // Arithmetic negation.
   | (<cast>) // Cast.
 
 <cast> ::=
@@ -508,41 +507,35 @@ do_side_effect_computation(x, y);
 
 ```
 <op2> ::=
-  | +  // Addition.
-  | -  // Subtraction.
-  | *  // Multiplication.
-  | /  // Division.
-  | %  // Modulo.
-  | &  // Bitwise AND.
-  | |  // Bitwise OR.
-  | ^  // Bitwise XOR (exclusive OR).
+  | +    // Addition.
+  | -    // Subtraction.
+  | *    // Multiplication.
+  | /    // Integer division.
+  | %    // Modulo.
+  | &    // Bitwise AND.
+  | |    // Bitwise OR.
+  | ^    // Bitwise XOR (exclusive OR).
 
-  | ==  // Equality test.
-  | !=  // Inequality test.
-  | <  // Unsgined less than test.
-  | <s  // Signed less than test.
-  | >  // Unsigned greater than test.
-  | >s  // Signed greater than test.
-  | <=  // Unsigned less than or equal test.
+  | ==   // Equality test.
+  | !=   // Inequality test.
+  | <    // Unsgined less than test.
+  | <s   // Signed less than test.
+  | >    // Unsigned greater than test.
+  | >s   // Signed greater than test.
+  | <=   // Unsigned less than or equal test.
   | <=s  // Signed less than or equal test.
-  | >=  // Unsigned greater than or equal test.
+  | >=   // Unsigned greater than or equal test.
   | >=s  // Signed greater than or equal test.
 
-  | <<  // Left rotation.
-  | >>  // Right rotation.
-  | >>s  // Arithmetic right rotation.
+  | <<   // Left shift.
+  | >>   // Right shift.
+  | >>s  // Arithmetic right shift.
   | <<r  // Left rotation.
   | >>r  // Right rotation.
 
-  | &&  // Boolean AND.
-  | ||  // Boolean OR.
+  | &&   // Boolean AND.
+  | ||   // Boolean OR.
 ```
 
-- `+`: Addition.
-- `<<`: Left shift.
-- `>>`: Right shift.
-- `>>s`: Arithmetic right shift. In ARM-M4, an arithmetic right shift by 0 is
-  compiled to a `MOV`.
-- `<<r`: Left rotation.
-- `>>r`: Right rotation. In ARM-M4, a right rotation by 0 is compiled to a
-  `MOV`.
+- `>>s`: Arithmetic right shift. In ARM-M4, an arithmetic right shift by 0 is compiled to a `MOV`.
+- `>>r`: Right rotation. In ARM-M4, a right rotation by 0 is compiled to a `MOV`.
