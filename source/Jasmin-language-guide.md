@@ -194,6 +194,69 @@ Jasmin code comprises the following constructs:
   | <instr_call>
 ```
 
+## Types
+
+[comment]: <> (TODO: introdution to types?)
+
+`inline int` \
+`reg bool` \
+`reg u8` \
+`reg u8[N]` \
+`stack u8` \
+`stack u8[N]` \
+`reg ptr u8[N]`
+
+## Variable declaration
+
+Syntax for variable declaration is as follows:
+```
+<type> <var_name>;
+```
+For instance,
+```
+u64 var;
+stack u64[N] arr;
+inline int i;
+```
+
+## Storage locations
+
+There are five locations where values can be stored:
+
+### Variables
+```
+reg u64 var;
+var = foo();
+```
+
+### Array accesses
+```
+stack u64[10] arr;
+arr[0] = 5;
+```
+
+### Memory accesses
+```
+fn foo(reg u64 ptr) {
+  [ptr] = (64u)0;
+  [ptr + 8 * INDEX] = (64u)-1;
+}
+```
+
+### Subarrays
+```
+stack u64[4*N] arr;
+arr[2*N : N] = foo();
+```
+
+### Underscore
+```
+reg u64 var;
+_ = foo();
+_, var = bar();
+```
+
+
 1. assignments;
 1. intrinsics;
 1. conditionals;
@@ -227,6 +290,23 @@ This means that the assignment is only performed if the condition `b` evaluates
 to `true`.
 TODO: Add link to left value and expression syntax.
 
+### Subarrays
+For easier array handling subarray notation was introduced.
+```
+stack u64[4*N] a;
+stack u64[4*N] b;
+
+a[i:N] = b[j:N];
+```
+Subarrays consists on two parts:
+- index: where the access starts
+- length: amount of elements to access
+
+### Load and store
+
+
+[comment]: <> (we could say something about casting variables, TODO: something related to bool assignments and about loads and stores)
+
 
 ## Intrinsics
 
@@ -246,6 +326,8 @@ function name.
 
 The list of available architecture-specific instructions can be seen using
 `$ jasminc -help-intrinsics`.
+
+[comment]: <> (we can see which intrinsics are available but information about arguments is not provided enviar a js)
 
 
 ## Conditionals
@@ -283,6 +365,8 @@ if (x < y) {
 where again last `else` branch can be omitted.
 This is syntactic sugar for nested conditionals.
 
+[comment]: <> (we can only use boolean values in conditions and conditions cannot be complex operations)
+
 
 ## For loops
 
@@ -315,6 +399,8 @@ for i = 13 downto 0 {
     i -= 2;
 }
 ```
+
+[comment]: <> (could mention about the code growth since for loops are compiled as unrolled loops)
 
 ## While loops
 
@@ -373,6 +459,8 @@ The following is valid syntax for a function that does not return any values:
 do_side_effect_computation(x, y);
 ```
 
+[comment]: <> (introduce notation for empty lvalues `_`)
+
 ## Expressions
 ```
 <expr> ::=
@@ -391,6 +479,9 @@ do_side_effect_computation(x, y);
   | (<int><sign><int>)[<expr>, ..., <expr>] // Packing.
   | (<expr>)
 ```
+
+[comment]: <> (maybe an example of each, this notation might be overwhelming for beginners)
+
 ### Unary operators
 
 ```
@@ -446,3 +537,5 @@ do_side_effect_computation(x, y);
 - `<<r`: Left rotation.
 - `>>r`: Right rotation. In ARM-M4, a right rotation by 0 is compiled to a
   `MOV`.
+
+[comment]: <> (which arguments can each of this take)
