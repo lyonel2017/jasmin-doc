@@ -411,7 +411,6 @@ for i = 13 downto 0 {
 }
 ```
 
-[comment]: <> (could mention about the code growth since for loops are compiled as unrolled loops)
 
 ## While loops
 
@@ -470,7 +469,6 @@ The following is valid syntax for a function that does not return any values:
 do_side_effect_computation(x, y);
 ```
 
-[comment]: <> (introduce notation for empty lvalues `_`)
 
 ## Expressions
 ```
@@ -548,5 +546,3 @@ do_side_effect_computation(x, y);
 - `<<r`: Left rotation.
 - `>>r`: Right rotation. In ARM-M4, a right rotation by 0 is compiled to a
   `MOV`.
-
-[comment]: <> (which arguments can each of this take)
