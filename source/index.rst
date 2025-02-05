@@ -3,14 +3,64 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to jasmin-doc's documentation!
+Welcome to jasmin documentation!
 ======================================
+
 
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
+   :caption: Global:
+   :glob:
+
+   jasmin.wiki/About.md
+   jasmin.wiki/Home.md
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Jasmin-Lang:
+   :glob:
 
    Jasmin-language-guide.md
+   jasmin.wiki/Arrays.md
+   jasmin.wiki/System-calls.md
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Jasmin Compiler:
+   :glob:
+
+   jasmin.wiki/Reference-interpreter.md
+   jasmin.wiki/Howto-Add-Instructions.md
+   jasmin.wiki/Compilation-to-assembly.md
+   jasmin.wiki/Command-Line-Interface.md
+   jasmin.wiki/Installation-instructions.md
+   jasmin.wiki/Compilation-passes.md
+   jasmin.wiki/Memory-Layout.md
+   jasmin.wiki/Pretty-printing.md
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Tooling:
+   :glob:
+
+   jasmin.wiki/Extraction-to-EasyCrypt.md
+   jasmin.wiki/Safety-checker.md
+   jasmin.wiki/Selective-Speculative-Load-Hardening.md
+   jasmin.wiki/Constant-time-verification.md
+
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Misc:
+   :glob:
+
+   jasmin.wiki/FAQ.md
+   jasmin.wiki/Get-support.md
+   jasmin.wiki/Wish-List.md
+   jasmin.wiki/dev/Branches.md
+   jasmin.wiki/dev/CI-on-gitlab.md
+   jasmin.wiki/dev/Making-a-release.md
+   jasmin.wiki/Emacs-mode.md
 
 Indices and tables
 ==================
