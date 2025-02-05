@@ -194,18 +194,6 @@ Jasmin code comprises the following constructs:
   | <instr_call>
 ```
 
-## Types
-
-[comment]: <> (TODO: introdution to types?)
-
-`inline int` \
-`reg bool` \
-`reg u8` \
-`reg u8[N]` \
-`stack u8` \
-`stack u8[N]` \
-`reg ptr u8[N]`
-
 ## Variable declaration
 
 Syntax for variable declaration is as follows:
