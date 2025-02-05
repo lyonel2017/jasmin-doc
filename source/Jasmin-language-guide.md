@@ -499,7 +499,7 @@ Expressions are made of:
   - binary operators (`e - f`);
   - conditional expressions (`c ? th : el`);
   - function calls (`f(x, y)`);
-  - primitive instructions `(#copy_32(t)`).
+  - primitive instructions (`#copy_32(t)`).
 
 ### Unary operators
 
