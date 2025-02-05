@@ -198,7 +198,12 @@ Jasmin code comprises the following constructs:
 
 Syntax for variable declaration is as follows:
 ```
-<type> <var_name>;
+<var_list> ::=
+  | <var>
+  | <var>, <var_list>
+
+<var_decl> ::=
+  | <type> <var_list>;
 ```
 For instance,
 ```
@@ -244,15 +249,6 @@ _ = foo();
 _, var = bar();
 ```
 
-
-1. assignments;
-1. intrinsics;
-1. conditionals;
-1. for loops;
-1. while loops;
-1. system calls; and
-1. function calls.
-
 TODO: Add link to command syntax.
 
 
@@ -279,12 +275,23 @@ to `true`.
 TODO: Add link to left value and expression syntax.
 
 ### Subarrays
-For easier array handling subarray notation was introduced.
+To facilitate array handling, subarray notation was introduced. Consider the following example,
 ```
-stack u64[4*N] a;
-stack u64[4*N] b;
-
-a[i:N] = b[j:N];
+a[i:N] = add_array(a[i:N], b[j:N]);
+```
+with,
+```
+inline fn add_array(stack u64[N] a b) -> stack u64[N] {
+  inline int i;
+  for i = 0 to N {
+    reg u64 ai bi;
+    ai = a[i];
+    bi = b[i];
+    ai += bi;
+    a[i] = ai;
+  }
+  return a;
+}
 ```
 Subarrays consists on two parts:
 - index: where the access starts
