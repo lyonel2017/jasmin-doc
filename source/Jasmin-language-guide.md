@@ -293,9 +293,12 @@ inline fn add_array(stack u64[N] a b) -> stack u64[N] {
   return a;
 }
 ```
-Subarrays consists on two parts:
+Subarrays consists on two elements:
 - index: where the access starts
 - length: amount of elements to access
+
+> Note: In Jasmin it is possible to disable the implicit access (non-scaled acccess) by adding a dot before the opening square brackets.
+> For further information, please check [Jasmin wiki](https://github.com/jasmin-lang/jasmin/wiki/Arrays)
 
 ### Load and store
 Suppose a register `reg u64 ptr` which value is a memory address. Then, for loading values from memory the notation is as follows:
