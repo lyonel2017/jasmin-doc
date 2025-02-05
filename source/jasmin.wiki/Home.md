@@ -1,28 +1,28 @@
-# Jasmin
+<!-- # Jasmin -->
 
-Welcome to the jasmin wiki!
+<!-- Welcome to the jasmin wiki! -->
 
-## Getting Started
+<!-- ## Getting Started -->
 
-  - [[About Jasmin|About]]
-  - [[Installation instructions]]
-  - [[Compilation to assembly]]
-  - [[Get support]]
-  - [[Pretty printing]] (export to LaTeX)
+<!--   - [[About Jasmin|About]] -->
+<!--   - [[Installation instructions]] -->
+<!--   - [[Compilation to assembly]] -->
+<!--   - [[Get support]] -->
+<!--   - [[Pretty printing]] (export to LaTeX) -->
 
-## The Jasmin Language
+<!-- ## The Jasmin Language -->
 
-  - [[Structure of a Jasmin program]]
-  - [[Arrays]]
-  - [[Memory Layout]]
-  - [[Expressions]]
+<!--   - [[Structure of a Jasmin program]] -->
+<!--   - [[Arrays]] -->
+<!--   - [[Memory Layout]] -->
+<!--   - [[Expressions]] -->
 
-## Verification tools
+<!-- ## Verification tools -->
 
-  - [[Safety checker]]
-  - [[Extraction to EasyCrypt]]
-  - [[Constant-time verification]]
-  - [[Reference interpreter]] (a.k.a. executable formal semantics)
+<!--   - [[Safety checker]] -->
+<!--   - [[Extraction to EasyCrypt]] -->
+<!--   - [[Constant-time verification]] -->
+<!--   - [[Reference interpreter]] (a.k.a. executable formal semantics) -->
 
 ## Bibliography
 
@@ -32,8 +32,8 @@ Welcome to the jasmin wiki!
 
  - José Bacelar Almeida, Manuel Barbosa, Gilles Barthe, Arthur Blot, Benjamin Grégoire, Vincent Laporte, Tiago Oliveira, Hugo Pacheco, Benedikt Schmidt, and Pierre-Yves Strub. 2017. Jasmin: High-Assurance and High-Speed Cryptography. In Proceedings of the 2017 ACM SIGSAC Conference on Computer and Communications Security (CCS '17). Association for Computing Machinery, New York, NY, USA, 1807–1823. DOI:[10.1145/3133956.3134078](https://doi.org/10.1145/3133956.3134078)
 
-## Information for developers
+<!-- ## Information for developers -->
 
- - [[How to add intrinsics|Howto-Add-Instructions]]
- - [[Current branches in the git repository|Branches]]
- - [[Continuous Integration|CI-on-gitlab]]
+<!--  - [[How to add intrinsics|Howto-Add-Instructions]] -->
+<!--  - [[Current branches in the git repository|Branches]] -->
+<!--  - [[Continuous Integration|CI-on-gitlab]] -->

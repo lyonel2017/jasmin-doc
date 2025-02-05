@@ -3,17 +3,11 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to jasmin documentation!
+Welcome to the jasmin documentation!
 ======================================
 
-
-.. toctree::
-   :maxdepth: 2
-   :caption: Global:
-   :glob:
-
-   jasmin.wiki/About.md
-   jasmin.wiki/Home.md
+.. include:: jasmin.wiki/About.md
+   :parser: myst_parser.sphinx_
 
 .. toctree::
    :maxdepth: 2
@@ -61,6 +55,10 @@ Welcome to jasmin documentation!
    jasmin.wiki/dev/CI-on-gitlab.md
    jasmin.wiki/dev/Making-a-release.md
    jasmin.wiki/Emacs-mode.md
+
+
+.. include:: jasmin.wiki/Home.md
+   :parser: myst_parser.sphinx_
 
 Indices and tables
 ==================
