@@ -212,15 +212,19 @@ stack u64[N] arr;
 inline int i;
 ```
 
-## Storage locations
-
-There are five locations where values can be stored:
+## Left-value
+Basically, a left-value is the location where a value is stored,
 
 ### Variables
 ```
 reg u64 var;
 var = foo();
 ```
+```
+stack u64 var;
+var = foo();
+```
+> Note that there are different types of variables. The difference between `reg`, `stack` is explained in another [section]().
 
 ### Array accesses
 ```
