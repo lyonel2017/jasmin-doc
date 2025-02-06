@@ -194,13 +194,64 @@ Jasmin code comprises the following constructs:
   | <instr_call>
 ```
 
-1. assignments;
-1. intrinsics;
-1. conditionals;
-1. for loops;
-1. while loops;
-1. system calls; and
-1. function calls.
+## Variable declaration
+
+Syntax for variable declaration is as follows:
+```
+<var_list> ::=
+  | <var>
+  | <var>, <var_list>
+
+<var_decl> ::=
+  | <type> <var_list>;
+```
+For instance,
+```
+u64 var;
+stack u64[N] arr;
+inline int i;
+```
+
+## Left-value
+Left-values appear on the left-hand side of assignments. A left-value describes the location where a value is stored.
+
+### Variables
+```
+reg u64 var;
+var = foo();
+```
+```
+stack u64 var;
+var = foo();
+```
+> Note that there are different types of variables. The difference between `reg`, `stack` is explained in another [section]().
+
+### Array accesses
+```
+stack u64[10] arr;
+arr[0] = 5;
+```
+
+### Memory accesses
+```
+fn foo(reg u64 ptr) {
+  [ptr] = (64u)0;
+  [ptr + 8 * INDEX] = (64u)-1;
+}
+```
+
+### Subarrays
+```
+stack u64[4*N] arr;
+arr[2*N : N] = foo();
+```
+
+### Underscore
+```
+reg u64 var;
+_ = foo();
+_, var = bar();
+```
 
 TODO: Add link to command syntax.
 
@@ -227,6 +278,48 @@ This means that the assignment is only performed if the condition `b` evaluates
 to `true`.
 TODO: Add link to left value and expression syntax.
 
+### Subarrays
+To facilitate array handling, subarray notation was introduced. Consider the following example,
+```
+a[i:N] = add_array(a[i:N], b[j:N]);
+```
+with,
+```
+inline fn add_array(stack u64[N] a b) -> stack u64[N] {
+  inline int i;
+  for i = 0 to N {
+    reg u64 ai bi;
+    ai = a[i];
+    bi = b[i];
+    ai += bi;
+    a[i] = ai;
+  }
+  return a;
+}
+```
+Subarrays consists on two elements:
+- index: where the access starts
+- length: amount of elements to access
+
+> Note: In Jasmin it is possible to disable the implicit access (non-scaled acccess) by adding a dot before the opening square brackets.
+> For further information, please check [Jasmin wiki](https://github.com/jasmin-lang/jasmin/wiki/Arrays)
+
+### Load and store
+Suppose a register `reg u64 ptr` which value is a memory address. Then, for loading values from memory the notation is as follows:
+```
+reg u64 var;
+var = [ptr + offset];
+// or for better understanding
+var = (64u)[ptr + offset];
+```
+`offset` is measured in bytes.
+
+Notation for storing values is the same with a slight difference when specifying the type,
+```
+[ptr + offset] = var;
+// or for better understanding
+(u64)[ptr + offset] = var;
+```
 
 ## Intrinsics
 
@@ -259,7 +352,7 @@ The list of available architecture-specific instructions can be seen using
 
 Conditionals take an expression and two pieces of code, and execute one piece
 or the other depending on whether the expression evaluates to `true` or
-`false`.
+`false` (conditions cannot be complex expressions).
 The basic syntax for conditionals is as follows
 ```
 if (x != y) {
@@ -315,6 +408,7 @@ for i = 13 downto 0 {
     i -= 2;
 }
 ```
+
 
 ## While loops
 
@@ -373,6 +467,7 @@ The following is valid syntax for a function that does not return any values:
 do_side_effect_computation(x, y);
 ```
 
+
 ## Expressions
 ```
 <expr> ::=
@@ -406,14 +501,14 @@ Expressions are made of:
   - binary operators (`e - f`);
   - conditional expressions (`c ? th : el`);
   - function calls (`f(x, y)`);
-  - primitive instructions `(#copy_32(t)`).
+  - primitive instructions (`#copy_32(t)`).
 
 ### Unary operators
 
 ```
 <op1> ::=
-  | !  // Boolean and bitwise negation.
-  | -  // Arithmetic negation.
+  | !        // Boolean and bitwise negation.
+  | -        // Arithmetic negation.
   | (<cast>) // Cast.
 
 <cast> ::=
@@ -432,34 +527,34 @@ Unary operators are, by decreasing precedence:
 
 ```
 <op2> ::=
-  | +  // Addition.
-  | -  // Subtraction.
-  | *  // Multiplication.
-  | /  // Division.
-  | %  // Modulo.
-  | &  // Bitwise AND.
-  | |  // Bitwise OR.
-  | ^  // Bitwise XOR (exclusive OR).
+  | +    // Addition.
+  | -    // Subtraction.
+  | *    // Multiplication.
+  | /    // Integer division.
+  | %    // Modulo.
+  | &    // Bitwise AND.
+  | |    // Bitwise OR.
+  | ^    // Bitwise XOR (exclusive OR).
 
-  | ==  // Equality test.
-  | !=  // Inequality test.
-  | <  // Unsgined less than test.
-  | <s  // Signed less than test.
-  | >  // Unsigned greater than test.
-  | >s  // Signed greater than test.
-  | <=  // Unsigned less than or equal test.
+  | ==   // Equality test.
+  | !=   // Inequality test.
+  | <    // Unsgined less than test.
+  | <s   // Signed less than test.
+  | >    // Unsigned greater than test.
+  | >s   // Signed greater than test.
+  | <=   // Unsigned less than or equal test.
   | <=s  // Signed less than or equal test.
-  | >=  // Unsigned greater than or equal test.
+  | >=   // Unsigned greater than or equal test.
   | >=s  // Signed greater than or equal test.
 
-  | <<  // Left rotation.
-  | >>  // Right rotation.
-  | >>s  // Arithmetic right rotation.
+  | <<   // Left shift.
+  | >>   // Right shift.
+  | >>s  // Arithmetic right shift.
   | <<r  // Left rotation.
   | >>r  // Right rotation.
 
-  | &&  // Boolean AND.
-  | ||  // Boolean OR.
+  | &&   // Boolean AND.
+  | ||   // Boolean OR.
 ```
 
 - `+`: Addition.
@@ -473,7 +568,7 @@ Unary operators are, by decreasing precedence:
 
 Binary operators are, by decreasing precedence:
 
-  - multiplication (`x * y`), division (`x / y`), and remainder (`x % y`);
+  - multiplication (`x * y`), integer division (`x / y`), and remainder (`x % y`);
   - addition (`x + y`) and subtraction (`x - y`);
   - shifts (`x << y`; `x >>s y`) and rotations (`x <<r y`; `x >>r y`);
   - bitwise and (`x & y`);
