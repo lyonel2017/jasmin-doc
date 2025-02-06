@@ -213,7 +213,7 @@ inline int i;
 ```
 
 ## Left-value
-Basically, a left-value is the location where a value is stored,
+Left-values appear on the left-hand side of assignments. A left-value describes the location where a value is stored.
 
 ### Variables
 ```
