@@ -26,4 +26,14 @@ myst_enable_extensions = ['colon_fence']
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
 
 html_theme = "sphinx_rtd_theme"
+html_theme_options = {
+  'sticky_navigation': False
+}
+html_context = {
+    "display_github": True, # Integrate GitHub
+    "github_user": "lyonel2017", # Username
+    "github_repo": "jasmin-doc", # Repo name
+    "github_version": "main", # Version
+    "conf_py_path": "/source/", # Path in the checkout to the docs root
+}
 # html_static_path = ['_static']
