@@ -1,4 +1,4 @@
-## Constant-time programming
+# Constant-time programming
 
 A program is said to be [constant-time](https://bearssl.org/constanttime.html) when neither the control-flow (in particular conditions of if-then-else blocks and while loops) nor the memory accesses (the memory addresses that are read or written) depend on sensitive data (aka secrets).
 

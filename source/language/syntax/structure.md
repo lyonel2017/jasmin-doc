@@ -1,3 +1,5 @@
+# Structure
+
 A Jasmin program is a collection of:
 
   - parameters;

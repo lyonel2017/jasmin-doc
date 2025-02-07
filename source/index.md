@@ -1,55 +1,40 @@
-The Jasmin documentation
-========================
+# The Jasmin documentation
 
-:::{include} jasmin.wiki/About.md
-:heading-offset: 1
+:::{include} about.md
 :::
 
 :::{toctree}
-:caption: Jasmin-Lang:
-:maxdepth: 2
+:caption: Language reference
 
-Jasmin-language-guide.md
-jasmin.wiki/Arrays.md
-jasmin.wiki/System-calls.md
+language/syntax/index
+language/semantics/index
 :::
 
 :::{toctree}
-:caption: Jasmin Compiler:
-:maxdepth: 2
+:caption: Compiler
 
-jasmin.wiki/Reference-interpreter.md
-jasmin.wiki/Howto-Add-Instructions.md
-jasmin.wiki/Compilation-to-assembly.md
-jasmin.wiki/Command-Line-Interface.md
-jasmin.wiki/Installation-instructions.md
-jasmin.wiki/Compilation-passes.md
-jasmin.wiki/Memory-Layout.md
-jasmin.wiki/Pretty-printing.md
+compiler/passes/index
+compiler/advanced/index
 :::
 
 :::{toctree}
-:caption: Tooling:
-:maxdepth: 2
+:caption: Tools
 
-jasmin.wiki/Extraction-to-EasyCrypt.md
-jasmin.wiki/Safety-checker.md
-jasmin.wiki/Selective-Speculative-Load-Hardening.md
-jasmin.wiki/Constant-time-verification.md
+tools/jasminc
+tools/jasmin2ec
+tools/safety_checker
+tools/ct
+tools/sct
+tools/reference_interpreter
+tools/jasmin2tex
 :::
 
 :::{toctree}
-:caption: Misc:
-:maxdepth: 2
+:caption: Miscellaneous
 
-jasmin.wiki/FAQ.md
-jasmin.wiki/Get-support.md
-jasmin.wiki/Wish-List.md
-jasmin.wiki/dev/Branches.md
-jasmin.wiki/dev/CI-on-gitlab.md
-jasmin.wiki/dev/Making-a-release.md
-jasmin.wiki/Emacs-mode.md
+misc/faq
+misc/emacs_mode
 :::
 
-:::{include} jasmin.wiki/Home.md
+:::{include} bibliography.md
 :::

@@ -1,4 +1,4 @@
-# About Jasmin
+## About Jasmin
 
 Jasmin is a workbench for high-assurance and high-speed cryptography.
 Jasmin implementations aim at being efficient, safe, correct, and secure.

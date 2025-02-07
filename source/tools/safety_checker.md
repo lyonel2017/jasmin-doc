@@ -1,3 +1,5 @@
+# Safety checker
+
 The Jasmin compiler comes with a static analyser that attempts to automatically prove the safety of the program to be compiled.
 
 To use it, just call the compiler with the `-checksafety` flag on the command line:
