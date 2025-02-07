@@ -1,6 +1,7 @@
 # The Jasmin documentation
 
 :::{include} about.md
+:heading-offset: 1
 :::
 
 :::{toctree}
@@ -37,4 +38,5 @@ misc/emacs_mode
 :::
 
 :::{include} bibliography.md
+:heading-offset: 1
 :::

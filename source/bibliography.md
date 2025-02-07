@@ -1,4 +1,4 @@
-## Bibliography
+# Bibliography
 
   - José Bacelar Almeida, Manuel Barbosa, Gilles Barthe, Benjamin Grégoire, Adrien Koutsos, Vincent Laporte, Tiago Oliveira, and Pierre-Yves Strub, "The Last Mile: High-Assurance and High-Speed Cryptographic Implementations," 2020 IEEE Symposium on Security and Privacy (SP), San Francisco, CA, USA, 2020, pp. 965-982, doi: [10.1109/SP40000.2020.00028](https://doi.org/10.1109/SP40000.2020.00028).
 
