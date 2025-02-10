@@ -10,12 +10,12 @@ They can also rely on high-level abstractions (variables, functions, arrays, loo
 
 The **semantics** is formally defined to allow rigorous reasoning about program behaviors.
 The Coq definitions can be found in the `proofs/lang/sem.v` file.
-This semantics is executable, thus Jasmin programs can be directly [[interpreted|Reference-interpreter]].
+This semantics is executable, thus Jasmin programs can be directly [interpreted](tools/reference_interpreter).
 
-Jasmin programs can be automatically checked for **safety** and **termination** (using a trusted [[static analyzer|Safety-checker]]).
+Jasmin programs can be automatically checked for **safety** and **termination** (using a trusted [static analyzer](tools/safety_checker)).
 
 The Jasmin **compiler** produces predictable assembly and ensures that the use of high-level abstractions incurs no run-time penalty.
 It is formally verified for correctness (the precise Coq statement and the corresponding machine-checked proofs can be found in the `proofs/compiler/compiler_proof.v` file).
 This justifies that many properties can be proved on a source program and still apply to the corresponding assembly program: safety, termination, functional correctness…
 
-The Jasmin workbench leverages the [EasyCrypt](https://www.easycrypt.info/) toolset for **formal verification**. Jasmin programs can be [[extracted|Extraction-to-EasyCrypt]] to corresponding EasyCrypt programs to prove functional correctness, cryptographic security, or security against side-channel attacks (constant-time).
+The Jasmin workbench leverages the [EasyCrypt](https://www.easycrypt.info/) toolset for **formal verification**. Jasmin programs can be [extracted](tools/jasmin2ec) to corresponding EasyCrypt programs to prove functional correctness, cryptographic security, or security against side-channel attacks (constant-time).

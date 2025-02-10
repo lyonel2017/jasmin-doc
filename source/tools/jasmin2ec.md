@@ -1,6 +1,8 @@
+# Easycrypt extraction
+
 The Jasmin compiler is formally proven in Coq, this means that we have a formal proof ensuring that it preserves the semantics of safe programs. But how can we prove that a source Jasmin program satisfies properties that will be preserved by the compiler?
 To that end, the compiler allows to extract Jasmin program to an equivalent EasyCrypt model. This extraction is correct on safe programs. 
-# Command line for extraction
+## Command line for extraction
 The command to extract EasyCrypt programs is the following: 
 
           jasminc -ec funname -oec ecFileName jasminFileName
@@ -9,18 +11,17 @@ The command to extract EasyCrypt programs is the following:
 * _ecFileName_ is the EasyCrypt file that will be generated.
 * _jasminFileName_ is the name of the Jasmin source file containing _funname_
 
-## Example 
 
-# Extraction for checking cryptographic constant time.
+## Extraction for checking cryptographic constant time.
 It is possible to extract a EasyCrypt model allowing that a Jasmin program satisfies the cryptographic constant time property.
 
 For this we need to add a -CT argument to the command line.
 
           jasminc -CT -ec funname -oec ecFileName jasminFileName
 
-For more explanation on how to verify that a program is constant time, see the [[Constant-time verification]] page.
+For more explanation on how to verify that a program is constant time, see the [Constant-time verification](ct) page.
 
-# Configure EasyCrypt to verify Jasmin programs
+## Configure EasyCrypt to verify Jasmin programs
 
 EasyCrypt models of Jasmin programs may refer to some `JModel` or `JWord` modules.
 These are part of the Jasmin library for EasyCrypt (to be found in the source code of Jasmin).
