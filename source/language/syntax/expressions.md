@@ -1,4 +1,4 @@
-## Expressions
+# Expressions
 ```
 <expr> ::=
   | <int>  // Integer constant.
@@ -33,7 +33,7 @@ Expressions are made of:
   - function calls (`f(x, y)`);
   - primitive instructions (`#copy_32(t)`).
 
-### Unary operators
+## Unary operators
 
 ```
 <op1> ::=
@@ -53,7 +53,7 @@ Unary operators are, by decreasing precedence:
   - boolean / bitwise negation (`! b`);
   - opposite (`- e`).
 
-### Binary operators
+## Binary operators
 
 ```
 <op2> ::=
@@ -110,5 +110,3 @@ Binary operators are, by decreasing precedence:
   - boolean disjunction (`b || c`).
 
 Note that most operators accept as suffix a size annotation. For instance `+32u` is the 32-bit (unsigned) addition and `+8u16` is the parallel 16-bit (unsigned) addition for vectors of 8 elements (i.e., 128 bit). Said annotation can be limited to a sign annotation, for instance `>>u` is the _logical_ right shift whereas `>>s` is the _arithmetic_ right shift.
-
-
