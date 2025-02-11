@@ -27,8 +27,7 @@ Indeed, each array cell is allocated to a specific (named) register.
 
 Arrays that are in memory (stack or global) may be indexed by run-time values
 (i.e., values that are not statically known).
-Such an index may be stored in a register as a machine word;
-it must be syntactically cast into an integer:
+Such an index may be stored in a register as a machine word:
 
     reg u64 r i;
     stack u64[4] a;
