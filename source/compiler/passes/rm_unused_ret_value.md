@@ -1,3 +1,3 @@
-# Remove unsused returned values
+# Remove unused returned values
 
 TODO
