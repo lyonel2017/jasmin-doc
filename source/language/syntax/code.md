@@ -43,50 +43,6 @@ stack u64[N] arr;
 inline int i;
 ```
 
-## Left-value
-Left-values appear on the left-hand side of assignments. A left-value describes the location where a value is stored.
-
-### Variables
-```
-reg u64 var;
-var = foo();
-```
-```
-stack u64 var;
-var = foo();
-```
-> Note that there are different types of variables. The difference between `reg`, `stack` is explained in another [section]().
-
-### Array accesses
-```
-stack u64[10] arr;
-arr[0] = 5;
-```
-
-### Memory accesses
-```
-fn foo(reg u64 ptr) {
-  [ptr] = (64u)0;
-  [ptr + 8 * INDEX] = (64u)-1;
-}
-```
-
-### Subarrays
-```
-stack u64[4*N] arr;
-arr[2*N : N] = foo();
-```
-
-### Underscore
-```
-reg u64 var;
-_ = foo();
-_, var = bar();
-```
-
-TODO: Add link to command syntax.
-
-
 ## Assignments
 
 ```
@@ -94,63 +50,21 @@ TODO: Add link to command syntax.
   | <lval> = <expr>;
 ```
 
-The basic syntax for assignments is the usual equal sign
+The basic syntax for assignments is the usual equal sign:
 ```
-x = y;
+x = y + 1;
 ```
 and prefixing the equal sign with a binary operator `x += y;` is simply
 syntactic sugar for `x = x + y;`.
+
+There is an [expression](expressions) on the right-hand side of the expression
+and a [left-value](lvalues) on the left-hand side.
 
 Assignments can be made conditional by adding an `if` clause as a suffix
 ```
 x = y if b;
 ```
-This means that the assignment is only performed if the condition `b` evaluates
-to `true`.
-TODO: Add link to left value and expression syntax.
-
-### Subarrays
-To facilitate array handling, subarray notation was introduced. Consider the following example,
-```
-a[i:N] = add_array(a[i:N], b[j:N]);
-```
-with,
-```
-inline fn add_array(stack u64[N] a b) -> stack u64[N] {
-  inline int i;
-  for i = 0 to N {
-    reg u64 ai bi;
-    ai = a[i];
-    bi = b[i];
-    ai += bi;
-    a[i] = ai;
-  }
-  return a;
-}
-```
-Subarrays consists on two elements:
-- index: where the access starts
-- length: amount of elements to access
-
-> Note: In Jasmin it is possible to disable the implicit access (non-scaled acccess) by adding a dot before the opening square brackets.
-> For further information, please check [Jasmin wiki](https://github.com/jasmin-lang/jasmin/wiki/Arrays)
-
-### Load and store
-Suppose a register `reg u64 ptr` which value is a memory address. Then, for loading values from memory the notation is as follows:
-```
-reg u64 var;
-var = [ptr + offset];
-// or for better understanding
-var = (64u)[ptr + offset];
-```
-`offset` is measured in bytes.
-
-Notation for storing values is the same with a slight difference when specifying the type,
-```
-[ptr + offset] = var;
-// or for better understanding
-(u64)[ptr + offset] = var;
-```
+This means that the assignment is only performed if the condition `b` evaluates to `true`.
 
 ## Intrinsics
 
@@ -291,8 +205,10 @@ The syntax for function calls is as follows
 ```
 z = add_then_shift_left(x, y, 2);
 ```
-where to the left of the equals sign we have a list of variables corresponding
-to the return type of the function.
+where to the left of the equals sign we have a comma-separated list of
+[left-values](lvalues) corresponding to the return type of the function and the
+parentheses contain the arguments as a comma-separated list of [expression](expressions).
+
 The following is valid syntax for a function that does not return any values:
 ```
 do_side_effect_computation(x, y);
