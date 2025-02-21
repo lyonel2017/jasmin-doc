@@ -9,7 +9,8 @@
   | <var>[<expr>]  // Array access.
   | <var>[<wsize> <expr>]  // Array access.
   | <var>.[<wsize> <expr>]  // Unscaled array access.
-  | <var>[<expr> : <expr>]  // Subarray.
+  | <var>[<wsize> <expr> : <expr>]  // Subarray.
+  | <var>.[<wsize> <expr> : <expr>]  // Unscaled subarray.
   | <op1> <expr>  // Unary operation.
   | <expr> <op2> <expr>  // Binary operation.
   | <expr> ? <expr> : <expr>  // Conditional.
@@ -110,3 +111,64 @@ Binary operators are, by decreasing precedence:
   - boolean disjunction (`b || c`).
 
 Note that most operators accept as suffix a size annotation. For instance `+32u` is the 32-bit (unsigned) addition and `+8u16` is the parallel 16-bit (unsigned) addition for vectors of 8 elements (i.e., 128 bit). Said annotation can be limited to a sign annotation, for instance `>>u` is the _logical_ right shift whereas `>>s` is the _arithmetic_ right shift.
+
+## Array access
+
+For an array
+```
+stack u64[10] x;
+```
+`x[i]` accesses the i-th element of the array (the first index is 0).
+
+Other indexing syntaxes are available, since Jasmin arrays of any type are
+fundamentally byte arrays.
+Therefore, accesses with a different type than the declared type of the array
+are possible, such as `x[u16 i]` which views `x` as a length 40 array of `u16`
+and accesses the i-th element.
+
+Further, non-scaled array accesses are also possible:
+`x.[u16 1]` returns the `u16` composed of the second and third bytes of the array.
+The explicit type can also be left out `x.[i]` is equivalent to `x.[u64 i]`.
+
+> Note: Jasmin semantics specifies the conversion between bytes and words as little-endian.
+
+## Subarrays
+
+To facilitate array handling, subarray notation was introduced. Consider the
+following example,
+```
+a[i:N] = add_array(a[i:N], b[j:N]);
+```
+with,
+```
+inline fn add_array(stack u64[N] a b) -> stack u64[N] {
+  inline int i;
+  for i = 0 to N {
+    reg u64 ai bi;
+    ai = a[i];
+    bi = b[i];
+    ai += bi;
+    a[i] = ai;
+  }
+  return a;
+}
+```
+Subarrays consists on two elements:
+- index: where the access starts
+- length: amount of elements to access (must be a constant `int`).
+
+Similarly to array indexing, non-scaled subarrays and subarrays with
+type-casting are supported: `a.[i:N]`, `a[u16 i:N]`, `a.[u16 i:N]`.
+
+## Memory accesses
+
+Suppose a register `reg u64` whose value is a memory address.
+Then, for loading values from memory the notation is as follows:
+```
+reg u64 var;
+var = [ptr + offset];
+// or for better understanding
+var = (64u)[ptr + offset];
+```
+`offset` is measured in bytes.
+
