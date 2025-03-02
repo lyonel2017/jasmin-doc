@@ -101,35 +101,29 @@ This is automatically proved by the safety checker, called as follows:
 
     jasminc -checksafety gimli.jazz
 
-The EasyCrypt model for constant-time verification can be obtained by calling the compiler as follows:
+The EasyCrypt model for constant-time verification can be obtained by calling `jasmin2ec` as follows:
 
-    jasminc -CT -ec gimli -oec gimli_ct.ec gimli.jazz
+    jasmin2ec -f gimli -o gimli_ct.ec gimli.jazz
 
 This produces an EasyCrypt file `gimli_ct.ec` that looks like what follows.
 
 ```
 module M = {
-  var leakages : leakages_t
-
-  proc rotate (x:W32.t, bits:int) : W32.t = {
-    (* … *)
-  }
-
-  proc gimli (state:W64.t) : unit = {
-    (* … *)
+  proc gimli (state:W64.t) : JLeakage.leakage * W64.t = {
+    var leak:JLeakage.leakages;
     var round:int;
-
-    leakages <- LeakFor(0,24) :: LeakAddr([]) :: leakages;
-    round <- 0;
-    (* … *)
-    return ();
+    leak <- [];
+    leak_b <- [];
+    leak <- (leak ++ [(LeakList [(Leak_int 24); (Leak_int 0)])]);
+    round <- 24;
+    (* ... *)
+    return ((LeakList leak), state);
   }
 }.
 ```
 
-There is a module `M` with its variable `leakages` and a model of each function.
-Each operation that may leak some data has been instrumented to update that variable,
-as can be seen at the beginning of the `gimli` function whose first instruction is a `for` loop.
+There is a module `M` with a model of each function, where the functions return a leakage value in addition to the return value corresponding to the Jasmin semantics.
+Each operation that may leak some data has been instrumented accumulate the leakage in that leakage value.
 
 Now the constant-time property of the `gimli` function can be (manually) stated.
 In a fresh file, the generated `Gimli_ct` module is first required,
@@ -145,13 +139,13 @@ import var Gimli_ct.M.
 (* Wrong statement; the interactive proof script can be used to infer a sufficient pre-condition *)
 equiv gimli_ct :
   Gimli_ct.M.gimli ~ Gimli_ct.M.gimli :
- true ==> ={leakages}.
+ true ==> res{1}.`1 = res{2}.`1.
 proof. proc; inline *; sim. abort.
 
 (* Correct statetement, trivial proof script. *)
 equiv gimli_ct :
   Gimli_ct.M.gimli ~ Gimli_ct.M.gimli :
-  ={leakages, state} ==> ={leakages}.
+  ={state} ==> res{1}.`1 = res{2}.`1.
 proof. proc; inline *; sim. qed.
 ```
 

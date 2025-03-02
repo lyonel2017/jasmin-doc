@@ -14,4 +14,5 @@ architectures.
 structure.md
 code.md
 expressions.md
+lvalues.md
 :::
