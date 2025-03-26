@@ -1,3 +1,3 @@
-# Functions Inlining
+# Function Inlining
 
 TODO
