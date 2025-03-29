@@ -5,7 +5,7 @@ A Jasmin program is a collection of:
   - requires;
   - parameters;
   - global variables;
-  - types aliases
+  - types aliases;
   - functions.
 
 ## Require
