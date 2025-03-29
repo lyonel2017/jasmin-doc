@@ -13,9 +13,11 @@ author = 'The Jasmin developer team'
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
-extensions = ["myst_parser","sphinx_rtd_theme"]
+extensions = ["myst_parser","sphinx_rtd_theme","sphinx.ext.graphviz"]
 
 myst_enable_extensions = ['colon_fence']
+
+graphviz_output_format="svg"
 
 # templates_path = ['_templates']
 # exclude_patterns = []
