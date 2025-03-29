@@ -5,18 +5,22 @@ on:
     branches: [main] # branch to trigger deployment
 
 jobs:
+  graphviz:
+    runs-on: ubuntu-20.04
+    steps
+    - uses: actions/checkout@v4
+    - name: Setup Graphviz
+      uses: ts-graphviz/setup-graphviz@v2
+
   pages:
     runs-on: ubuntu-20.04
+    needs: graphviz
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     permissions:
       pages: write
       id-token: write
-    steps:
-    - uses: actions/checkout@v4
-    - name: Setup Graphviz
-      uses: ts-graphviz/setup-graphviz@v2
     steps:
     - id: deployment
       uses: sphinx-notes/pages@v3
