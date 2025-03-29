@@ -14,10 +14,9 @@ jobs:
       pages: write
       id-token: write
     steps:
-    - id: deployment
     - name: Setup Graphviz
       uses: ts-graphviz/setup-graphviz@v2
-    - name: Compile doc
+    - id: deployment
       uses: sphinx-notes/pages@v3
       with:
         documentation_path: ./source
