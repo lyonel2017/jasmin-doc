@@ -13,9 +13,6 @@ You can click on a pass to access its dedicated page.
 
 The particularity of the Jasmin compiler is of course that it is formally
 proved correct. Each pass falls into one of the three following categories.
-- It is trusted: nothing is actually proved about the pass, because it is
-  not clear what could be proved about it and/or it is simple enough.
-  The pass is then part of the Trusted Computing Base.
 - It is proved: this is the case for most of the passes. The pass is written
   and proved correct in the Rocq Prover.
 - It is validated: another approach to prove the correctness of a pass is
@@ -23,10 +20,14 @@ proved correct. Each pass falls into one of the three following categories.
   a checker that is run after the pass and validates that what the pass did
   is correct. Typically, in this case, the pass is written in OCaml (and not
   proved), and the checker is written and proved in Rocq.
+- It is trusted: nothing is actually proved about the pass, because it is
+  not clear what could be proved about it and/or it is simple enough.
+  The pass is then part of the Trusted Computing Base.
 
 Here is a list of the passes with a short description of what each does.
 Each pass is described in more detail on a dedicated page.
 
+- [Replace word ints](wint_word) replaces word-sized integers with machine words
 - [Array copy](array_copy) expands `#copy` operations into explicit `for` loops
 - [Array init](array_init) inserts array-init instructions at the beginning of functions
 - [Lowering of spills](lower_spill) replaces `#spill` and `#unspill` operations
@@ -77,6 +78,7 @@ Each pass is described in more detail on a dedicated page.
 :::{toctree}
 :hidden:
 
+wint_word
 array_copy
 array_init
 lower_spill
